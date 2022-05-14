@@ -101,7 +101,7 @@ where hire_date >= '07/01/01' ;
 --이름이 Lex인 직원의 연봉을 출력하세요
 select  salary
 from employees
-where first_name = 'Lex' ;
+where first_name = 'Lex' ;x
 
 
 --조건이 2개이상 일때 한꺼번에 조회하기
