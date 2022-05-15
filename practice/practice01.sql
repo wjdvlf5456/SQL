@@ -56,3 +56,30 @@ WHERE salary >= 10000
 AND salary < 14000
 ORDER BY salary  DESC;
 
+/*
+문제6.
+부서번호가 10, 90, 100 인 직원의 이름, 월급, 입사일, 부서번호를 나타내시오 입사일은 1977-12 와 같이 표시하시오
+*/
+
+SELECT
+			first_name || ' ' || last_name "이름",
+			salary "월급",
+			to_char(hire_date, 'YYYY-MM') "입사일",
+			department_id "부서번호"
+FROM 
+employees;
+
+/*
+문제7.
+이름(first_name)에 S 또는 s 가 들어가는 직원의 이름, 월급을 나타내시오
+*/
+
+SELECT 
+			first_name || ' ' || last_name "이름",
+			salary "월급"
+FROM 
+employees
+WHERE first_name LIKE '%S%'
+OR first_name LIKE '%s%';
+
+
