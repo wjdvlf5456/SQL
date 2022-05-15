@@ -82,4 +82,13 @@ employees
 WHERE first_name LIKE '%S%'
 OR first_name LIKE '%s%';
 
+/*
+문제8.
+전체 부서를 출력하려고 합니다. 순서는 부서이름이 긴 순서대로 출력해 보세오.
+*/
 
+SELECT 
+			department_id
+FROM 
+employees 
+ORDER BY length(department_id) DESC ;
