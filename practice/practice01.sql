@@ -33,5 +33,14 @@ employees
 WHERE commission_pct  ISNULL
 AND salary  >=3000;
 
+/*
+문제4.
+최고월급(max_salary)이 10000 이상인 업무의 이름(job_title)과 최고월급(max_salary)을 최 고월급의(max_salary) 내림차순(DESC)로 정렬하여 출력하세요.
+ */
+SELECT job_title ,max_salary 
+FROM
+jobs
+ORDER BY max_salary DESC ;
+
 
 
