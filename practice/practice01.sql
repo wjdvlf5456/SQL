@@ -42,5 +42,17 @@ FROM
 jobs
 ORDER BY max_salary DESC ;
 
+/*
+문제5.
+월급이 14000 미만 10000 이상인 직원의 이름(first_name), 월급, 커미션퍼센트 를 월급순 (내림차순) 출력하세오. 단 커미션퍼센트 가 null 이면 0 으로 나타내시오
+ */
 
+SELECT  first_name, 
+			salary ,
+			COALESCE (commission_pct,0)	--postgresql로 작성하여 coalesce로 대체하였다. oracle에서 nvl
+FROM 
+employees
+WHERE salary >= 10000 
+AND salary < 14000
+ORDER BY salary  DESC;
 
