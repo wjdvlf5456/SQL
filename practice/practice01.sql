@@ -21,3 +21,17 @@ SELECT job_title "업무이름",
         max_salary "최고월급"
 from jobs
 order by max_salary desc;
+
+/*
+문제3.
+담당 매니저가 배정되어있으나 커미션비율이 없고, 월급이 3000초과인 직원의 이름, 매니저 아이디, 커미션 비율, 월급 을 출력하세요.
+*/
+
+SELECT first_name ,last_name ,manager_id ,commission_pct ,salary 
+FROM 
+employees
+WHERE commission_pct  ISNULL
+AND salary  >=3000;
+
+
+
