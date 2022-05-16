@@ -60,7 +60,10 @@ from employees;
 문제8.
 업무(JOBS)별로 최고임금과 최저임금의 차이를 출력해보세요. 차이를 확인할 수 있도록 내림차순으로 정렬하세요?
 */
-
+select	job_title "업무", 
+		max_salary - min_salary "최고 최저 차이"
+from jobs
+order by "최고 최저 차이" desc;
 /*
 문제9
 2005년 이후 입사자중 관리자별로 평균급여 최소급여 최대급여를 알아보려고 한다.
