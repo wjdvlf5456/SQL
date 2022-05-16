@@ -92,3 +92,24 @@ SELECT
 FROM 
 employees 
 ORDER BY length(department_id) DESC ;
+
+/*
+문제9.
+정확하지 않지만, 지사가 있을 것으로 예상되는 나라들을 나라이름을 대문자로 출력하고 올림차순(ASC)으로 정렬해 보세오.
+*/
+SELECT
+			upper(country_name)
+FROM 
+countries
+ORDER BY country_name ASC;
+
+
+/*
+문제10.
+입사일이 03/12/31 일 이전 입사한 직원의 이름, 월급, 전화 번호, 입사일을 출력하세요 전화번호는 545-343-3433 과 같은 형태로 출력하시오.
+ */
+
+
+
+
+
