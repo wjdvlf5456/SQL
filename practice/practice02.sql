@@ -36,6 +36,14 @@ employees;
 문제4.
 부서별로 평균임금, 최고임금, 최저임금을 부서아이디(department_id)와 함께 출력합니다. 정렬순서는 부서번호(department_id) 내림차순입니다.
 */
+select	
+		department_id "부서아이디",
+		round(avg(salary),0) "평균임금",
+		max(salary) "최고임금",
+		min(salary) "최저임금"
+from employees e 
+group by department_id
+order by department_id asc;
 
 /*
 문제5.
