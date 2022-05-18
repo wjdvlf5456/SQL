@@ -58,3 +58,9 @@ job_id 가 'ST_MAN' 인 직원의 급여보다 작은 직원의 사번,이름,�
 문제8.
 직원 입사일이 11번째에서 15번째의 직원의 사번, 이름, 급여, 입사일을 입사일 순서로 출력 하세요
  */
+select employee_id,
+		first_name, 
+		salary, 
+		(row_number()over(order by hire_date asc)) as rownum
+from employees
+limit 5 offset 10;
