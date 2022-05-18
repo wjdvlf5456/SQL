@@ -106,7 +106,18 @@ job_history 테이블은 과거의 담당업무의 데이터를 가지고 있다
 각 부서(department)에 대해서 부서번호(department_id), 부서이름(department_name), 매니저(manager)의 이름(first_name), 위치(locations)한 도시(city), 나라(countries)의 이름 (countries_name)
  그리고 지역구분(regions)의 이름(resion_name)까지 전부 출력해 보세요. (11건)
 */
-
+select d.department_id,
+		d.department_name,
+		man.first_name,
+		l.city,
+		c.country_name,
+		r.region_name
+from departments d 
+left outer join employees man on d.manager_id  = man.employee_id
+left outer join locations l on l.location_id  = d.location_id
+left outer join countries c on c.country_id  = l.country_id 
+left outer join regions r on r.region_id  = c.region_id
+where man.employee_id = d.manager_id;
 /*
 문제9.
 각 사원(employee)에 대해서 사번(employee_id), 이름(first_name), 부서명 (department_name), 매니저(manager)의 이름(first_name)을 조회하세요. 부서가 없는 직원(Kimberely)도 표시합니다.
