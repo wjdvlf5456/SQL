@@ -110,3 +110,13 @@ order by "평균급여" desc;
 아래회사는 보너스 지급을 위해 직원을 입사일 기준으로 나눌려고 합니다. 입사일이 02/12/31일 이전이면 '창립맴버, 03년은 '03년입사’, 04년은 ‘04년입사’ 이후입사자는 ‘상장이후입사’ optDate 컬럼의 데이터로 출력하세요.
 정렬은 입사일로 오름차순으로 정렬합니다.
 */
+SELECT  employee_id, 
+        salary,
+        CASE WHEN hire_date <= '02/12/31' THEN '창립맴버'
+             WHEN hire_date >= '03/01/01' and hire_date <= '03/12/31' THEN '03년'
+             WHEN hire_date >= '04/01/01' and hire_date <= '04/12/31' THEN '04년'
+             ELSE '상장이후'
+        END optDate,
+        hire_date
+FROM employees
+order by hire_date asc;
