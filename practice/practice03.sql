@@ -82,6 +82,16 @@ and emp.hire_date < man.hire_date ;
 값이 없는 경우 표시하지 않습니다.
 (27건)
 */
+select c.country_name "나라명",
+		l.country_id "나라아이디",
+		l.city "도시명",
+		l.location_id "도시아이디",
+		d.department_name "부서명",
+		d.department_id "부서아이디"
+from departments d
+left outer join locations l on l.location_id =d.location_id
+left outer join countries c  on c.country_id  = l.country_id
+order by country_name  asc ;
 
 /*
 문제7.
