@@ -12,7 +12,16 @@ where salary < (select avg(salary)
 직원번호(employee_id), 이름(first_name), 급여(salary), 평균급여, 최대급여를 급여의 오름차 순으로 정렬하여 출력하세요
 (51건)
 */
-
+select employee_id,
+		first_name,
+		salary,
+		avg(salary), 
+		max(salary)
+from employees e
+where salary > (select avg(salary) 
+					from employees)
+group by employee_id, first_name, salary
+order by e asc;
 /*
 문제3.
 직원중 Steven(first_name) king(last_name)이 소속된 부서(departments)가 있는 곳의 주소 를 알아보려고 한다.
