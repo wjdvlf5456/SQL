@@ -94,7 +94,15 @@ order by "최고 최저 차이" desc;
 2005년 이후 입사자중 관리자별로 평균급여 최소급여 최대급여를 알아보려고 한다.
 출력은 관리자별로 평균급여가 5000이상 중에 평균급여 최소급여 최대급여를 출력합니다. 평균급여의 내림차순으로 정렬하고 평균급여는 소수점 첫째짜리에서 반올림 하여 출력합니다.
 */
-
+select	employee_id, 
+		round(avg(salary),1) "평균급여",
+		min(salary) "최소급여",
+		max(salary) "최대급여"
+from employees
+where hire_date >= '05/01/01'
+group by employee_id
+having avg(salary) >= 5000 
+order by "평균급여" desc;
 
 
 /*
