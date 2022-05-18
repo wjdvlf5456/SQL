@@ -17,7 +17,16 @@ employees 테이블의 job_id는 현재의 업무아이디를 가지고 있습�
 부서가 없는 Kimberely(사번 178)은 표시하지 않습니다.
 (106건)
 */
-
+select e.employee_id,
+		e.first_name,
+		e.salary,
+		d.department_name,
+		j.job_title
+from employees e
+left outer join departments d on d.department_id  = e.employee_id
+left outer join jobs j on j.job_id  = e.job_id 
+where e.employee_id  = d.department_id
+order by employee_id asc;
 /*
 문제2-1.
 문제2에서 부서가 없는 Kimberely(사번 178)까지 표시해 보세요 (107건)
@@ -29,7 +38,8 @@ select e.employee_id,
 		j.job_title
 from employees e
 left outer join departments d on d.department_id  = e.employee_id
-left outer join jobs j on j.job_id  = e.job_id ;
+left outer join jobs j on j.job_id  = e.job_id 
+order by e.employee_id asc;
 
 /*
 문제3.
