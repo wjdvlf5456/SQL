@@ -43,7 +43,7 @@ select
 		min(salary) "최저임금"
 from employees e 
 group by department_id
-order by department_id asc;
+order by department_id desc;
 
 /*
 문제5.
@@ -71,6 +71,7 @@ from employees;
 문제7.
 평균임금과 최저임금의 차이가 2000 미만인 부서(department_id), 평균임금, 최저임금 그리 고 (평균임금 – 최저임금)를 (평균임금 – 최저임금)의 내림차순으로 정렬해서 출력하세요.
 */
+
 
 /*
 문제8.
