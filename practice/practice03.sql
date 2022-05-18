@@ -41,6 +41,13 @@ order by l.location_id asc, l.city asc, d.department_name asc, d.department_id a
 문제3-1.
 문제3에서 부서가 없는 도시도 표시합니다. (43건)
 */
+select l.location_id "도시아이디",
+		l.city "도시명",
+		d.department_name "부서명",
+		d.department_id "부서아이디"
+from departments d 
+right outer join locations l on d.location_id = l.location_id 
+order by l.location_id asc, l.city asc, d.department_name asc, d.department_id asc;
 
 /*
 문제4.
