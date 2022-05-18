@@ -1,121 +1,3 @@
-/**********************
-* Join
-***********************/
---equi join
-select *
-from employees, departments;
-
-select  employee_id ,
-        first_name,
-        salary,
-        department_name,
-        em.department_id "e_did",
-        de.department_id "d_did"
-from employees em, departments de
-where em.department_id = de.department_id;
-
---모든 직원이름, 부서이름, 업무명 을 출력하세요
-select  e.first_name,
-        d.department_name,
-        j.job_title,
-        e.salary,
-        e.department_id,
-        d.department_id,
-        e.job_id,
-        j.job_id
-from employees e, departments d, jobs j
-where e.department_id = d.department_id
-and e.job_id = j.job_id
-and e.salary >= 7000
-order by salary desc
-;
-
-SELECT first_name, em.department_id,
-              department_name, de.department_id
-FROM employees em, departments de
-WHERE em.department_id = de.department_id;
-
---equal join 오라클 문법
-SELECT	e.first_name,
-			e.department_id,
-			d.department_name,
-			d.department_id
-FROM employees e , departments d 
-WHERE e.department_id = d.department_id(+) ;
-
---equal join postgresql 문법
-SELECT	e.first_name,
-			e.department_id,
-			d.department_name,
-			d.department_id
-FROM employees e 
-LEFT OUTER JOIN departments d ON e.employee_id = d.department_id ;
-
---left join 예제
-SELECT	e.first_name,
-			e.department_id,
-			d.department_name,
-			d.department_id
-FROM employees e LEFT OUTER join departments d
-ON e.department_id = d.department_id ;
-
-/********************************************************
---subquarry
-********************************************************/
-
-select 
-		first_name,
-		salary 
-from employees
-where first_name = 'Den';
-
-select 	first_name,
-			salary
-from employees
-where salary >= 11000
-order by salary desc;
-
-
-select 	first_name ,
-			salary
-from employees
-where salary >= (select	salary
-					from employees
-					where first_name  = 'Den')
-order by salary desc;
-
---급여를 가장 적게 받는 사람의 이름, 급여, 사원번호는?
-select 	first_name ,
-			salary,
-			employee_id 
-from employees
-where salary  <= 11000;
-
-select min(salary)
-from employees;
-
---최종
-
-select first_name,
-		salary,
-		employee_id
-from employees
-where salary = (select min(salary)
-					  from employees);
-					 
---평균 급여보다 적게 받는 사람의 이름, 급여를 출력하세요
---평균
-select avg(salary) 
-from employees;
-
---출력용 쿼리
-select		first_name,
-			salary
-from employees
-where salary <= (select avg(salary) 
-						from employees)
-order by salary desc;
-
 /**************************************
 *SubQuery
 ***************************************/
@@ -186,9 +68,93 @@ where salary in (select salary
                  from employees
                  where department_id = 110);  --12008, 8300
 
+------------------------------------------------
+
+--각 부서별로 최고급여를 받는 사원이름을 출력하세요
+--where절로 구하기
+select  department_id,
+        max(salary)
+from employees
+group by department_id;
 
 
+select  first_name,
+        salary,
+        department_id,
+        email
+from employees
+where (department_id, salary) in ( select  department_id,
+                                           max(salary)
+                                   from employees
+                                   group by department_id  );
+
+--각 부서별로 최고급여를 받는 사원이름을 출력하세요
+--테이블로 구하기
+
+select  e.first_name,
+        e.salary,
+        e.department_id,
+        s.department_id,
+        s.maxSalary
+from employees e, (select department_id, 
+                          max(salary) maxSalary
+                   from employees
+                   group by department_id) s  
+where e.department_id = s.department_id
+and e.salary = s.maxSalary;
+
+-------------------------------------------------
+--rownum
+
+--급여를 가장 많이 받는 5명의 직원의 이름을 출력하시오.
+--정렬을 하면 rownum이 섞인다 -->정렬을 하고 rownum 을 준다
+select  rownum,
+        employee_id,
+        first_name,
+        salary
+from employees   -- 미리 정렬되어 있는 테이블이면 rownum이 섞이지 않는다
+order by salary desc;
+
+-->정렬(정렬된 테이블 사용)하고 rownum을 준다
+select  rownum,
+        ot.employee_id,
+        ot.first_name,
+        ot.salary
+from (select  employee_id,
+              first_name,
+              salary
+      from employees
+      order by salary desc) ot ;
 
 
+--rownum을 이용해서 원하는 순위의 값을 선택한다(where절)
+--where절이 2번 부터이면 데이터가 없다 (rownum이 항상 1이다)
+select  rownum ,
+        ot.employee_id,
+        ot.first_name,
+        ot.salary
+from (select  employee_id,
+              first_name,
+              salary
+      from employees
+      order by salary desc) ot  --정렬도 되어 있고  rownum로 있는 테이블이면?
+where rownum >= 2
+and rownum <= 5;
 
+-->(1)정렬하고 (2)rownum이 있는 테이블을 사용하고 (3)where절을 쓴다
+select  ort.rn,
+        ort.first_name,
+        ort.salary
+from (select  rownum rn,
+              ot.employee_id,
+              ot.first_name,
+              ot.salary
+      from (select  employee_id,
+                    first_name,
+                    salary
+            from employees
+            order by salary desc) ot   --(1)
+      )ort  --(2)
+where rn >= 2
+and rn<=5;  --(3)
 
