@@ -112,3 +112,11 @@ job_history 테이블은 과거의 담당업무의 데이터를 가지고 있다
 각 사원(employee)에 대해서 사번(employee_id), 이름(first_name), 부서명 (department_name), 매니저(manager)의 이름(first_name)을 조회하세요. 부서가 없는 직원(Kimberely)도 표시합니다.
 (106명)
 */
+select emp.employee_id,
+		emp.first_name,
+		d.department_name,
+		man.first_name
+from employees emp
+left outer join employees man on emp.manager_id  = man.employee_id
+left outer join departments d  on d.department_id  = emp.department_id
+where man.employee_id = emp.manager_id ;
