@@ -22,6 +22,14 @@ employees 테이블의 job_id는 현재의 업무아이디를 가지고 있습�
 문제2-1.
 문제2에서 부서가 없는 Kimberely(사번 178)까지 표시해 보세요 (107건)
 */
+select e.employee_id,
+		e.first_name,
+		e.salary,
+		d.department_name,
+		j.job_title
+from employees e
+left outer join departments d on d.department_id  = e.employee_id
+left outer join jobs j on j.job_id  = e.job_id ;
 
 /*
 문제3.
