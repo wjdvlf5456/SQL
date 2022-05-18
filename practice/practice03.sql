@@ -54,6 +54,12 @@ order by l.location_id asc, l.city asc, d.department_name asc, d.department_id a
 지역(regions)에 속한 나라들을 지역이름(region_name), 나라이름(country_name)으로 출력하 되 지역이름(오름차순), 나라이름(내림차순) 으로 정렬하세요.
 (25건)
 */
+select r.region_name "지역이름",
+		c.country_name "나라이름"
+from countries c 
+left outer join regions r on c.region_id  = r.region_id
+order by r.region_name asc, c.country_name desc;
+
 
 /*
 문제5.
