@@ -64,7 +64,13 @@ limit 1;
 문제8.
 평균 급여(salary)가 가장 높은 부서는?
 */
-
+select d.department_name 
+from departments d 
+left outer join employees e on e.employee_id = d.department_id 
+where d.department_id =e.employee_id
+group by d.department_name 
+order by avg(e.salary) asc
+limit 1;
 /*
 문제9.
 평균 급여(salary)가 가장 높은 지역은?
