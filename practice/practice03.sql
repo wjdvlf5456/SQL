@@ -67,7 +67,14 @@ order by r.region_name asc, c.country_name desc;
 사번(employee_id), 이름(first_name)과 채용일(hire_date), 매니저이름(first_name), 매니저입 사일(hire_date)을 조회하세요.
 (37건)
 */
-
+select emp.employee_id "사번",
+		emp.first_name "이름",
+		emp.hire_date "채용일",
+		man.first_name  "매니저이름",
+		man.hire_date  "매니저입사일"
+from employees emp, employees man
+where emp.manager_id  = man.employee_id 
+and emp.hire_date < man.hire_date ;
 /*
 문제6.
 나라별로 어떠한 부서들이 위치하고 있는지 파악하려고 합니다.
